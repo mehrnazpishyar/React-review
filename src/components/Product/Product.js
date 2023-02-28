@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from './product.module.css'
 
-const Product = () => {
+const Product = (props) => {
   return (
-    <div className={styles.container}>
-          <p>product name : react.js</p>
-          <p>product price : 99$</p>
+    <div className={styles.product}>
+      <p>product name : {props.name}</p>
+      <p>product price : {props.price}</p>
+      <button onClick={props.onDelete}>Delete</button>
     </div>
   )
 }

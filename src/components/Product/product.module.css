@@ -1,5 +1,11 @@
 
-.container {
-    align-items: center;
-    background: #807c7c;
+.product {
+ border: 1px solid #ccc;
+ border-radius: 10px;
+ padding: 20px 40px;
+ box-shadow: 0 10px 80px rgba(0,0,0,.065);
+ display: flex;
+ justify-content: space-around;
+ width: 40rem;
+ margin-top: 15px;
 }
