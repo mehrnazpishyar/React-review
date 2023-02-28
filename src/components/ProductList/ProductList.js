@@ -29,6 +29,13 @@ class ProductList extends Component {
     this.setState({ products });
   };
 
+  changeHandler = (event,id) => {
+    const products = [...this.state.products];
+    const selectedItem = products.find((p) => p.id === id);
+    selectedItem.title=event.target.value
+    this.setState({products})
+  }
+
   render() {
     return (
       <div>
@@ -41,6 +48,7 @@ class ProductList extends Component {
               key={index}
               onDelete={() => this.removeHandler(product.id)}
               onIncrement={() => this.incrementHandler(product.id)}
+              onChange = {(e) => this.changeHandler(e,product.id)}
             />
           );
         })}
