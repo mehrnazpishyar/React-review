@@ -50,9 +50,13 @@ class ProductList extends Component {
     this.setState({products})
   }
 
+
+
   render() {
+
     return (
       <div>
+        {!this.state.products.length && <div>There is no product in cart</div>}
         {this.state.products.map((product, index) => {
           return (
             <Product
