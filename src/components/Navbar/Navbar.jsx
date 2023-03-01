@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./navbar.module.css";
 
-const Navbar = (props) => {
+const Navbar = ({totalItems}) => {
   return (
     <header className={styles.navbar}>
-      <h2>mehrnaz</h2>
-      <span>{props.totalItems}</span>
+      <h2>Home</h2>
+      <span>{totalItems}</span>
     </header>
   );
 };

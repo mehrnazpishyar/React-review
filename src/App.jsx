@@ -21,35 +21,40 @@ class App extends Component {
 
   incrementHandler = (id) => {
     // 1. id => ok
-    // 2. find selected item
-    // 3. add one to item quantity
+    // 2. find index
+    // 3. clone the selected index and update the qty
     // 4. setState()
 
+    const index = this.state.products.findIndex((item) => item.id === id)
+    const product = {...this.state.products[index]};
+    product.quantity++;
     const products = [...this.state.products];
-    const selectedItem = products.find((p) => p.id === id);
-    selectedItem.quantity++;
-    //  this.setState({products:products})
-    this.setState({ products });
+    products[index] = product
+    this.setState({products})
   };
 
   decrementHandler = (id) => {
-    const products = [...this.state.products];
-    const selectedItem = products.find((p) => p.id === id);
-    if (selectedItem.quantity === 1) {
-      const filterProduct = products.filter((p) => p.id !== id);
-      this.setState({ products: filterProduct });
+    const index = this.state.products.findIndex((item) => item.id === id)
+    const product = {...this.state.products[index]};
+    if (product.quantity === 1) {
+      const filteredProduct=this.state.products.filter((p) => p.id !== id)
+       this.setState({ products: filteredProduct });
 
     }else {
-      selectedItem.quantity--;
+      const products = [...this.state.products];
+      product.quantity--;
       //  this.setState({products:products})
-      this.setState({ products });
+      products[index] = product
+      this.setState({products})
     }
   }
 
   changeHandler = (event,id) => {
+    const index = this.state.products.findIndex((item) => item.id === id)
+    const product = [...this.state.products[index]];
+product.title=event.target.value
     const products = [...this.state.products];
-    const selectedItem = products.find((p) => p.id === id);
-    selectedItem.title=event.target.value
+    products[index] = product
     this.setState({products})
   }
 
