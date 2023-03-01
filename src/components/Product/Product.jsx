@@ -13,7 +13,7 @@ const Product = (props) => {
       <input className={styles.input} type="text" onChange={props.onChange} value={props.product.title} />
       <button
         onClick={props.onDecrement}
-        className={styles.button}
+        className={`${styles.button} ${props.product.quantity === 1 && styles.remove}`}
       >
       {props.product.quantity > 1 ? "-" : <BiTrash />}
       </button>

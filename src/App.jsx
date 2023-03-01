@@ -1,14 +1,17 @@
-import React, { Component } from "react";
-import Product from "../Product/Product";
+import "./App.css";
+import ProductList from "./components/ProductList/ProductList";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import { Component } from "react";
 
-class ProductList extends Component {
+
+class App extends Component {
   state = {
-    products: [
+    products : [
       { title: "React.js", price: "99 $", id: 1, quantity: 1 },
       { title: "Node.js", price: "89 $", id: 2, quantity: 2 },
       { title: "Javascript", price: "79 $", id: 3, quantity: 3 },
-    ],
-  };
+    ]
+  }
 
   removeHandler = (id) => {
     console.log("clicked", id);
@@ -50,30 +53,15 @@ class ProductList extends Component {
     this.setState({products})
   }
 
-
-
   render() {
-
     return (
-      <div>
-        {!this.state.products.length && <div>There is no product in cart</div>}
-        {this.state.products.map((product, index) => {
-          return (
-            <Product
-              // name={product.title}
-              // price={product.price}
-              product={product}
-              key={index}
-              onDelete={() => this.removeHandler(product.id)}
-              onIncrement={() => this.incrementHandler(product.id)}
-              onDecrement={() => this.decrementHandler(product.id)}
-              onChange = {(e) => this.changeHandler(e,product.id)}
-            />
-          );
-        })}
-      </div>
-    );
+      <div className="container" id="title">
+      <Navbar totalItems={this.state.products.filter((p) => p.quantity > 0).length}/>
+      <ProductList products={this.state.products} onRemove={this.removeHandler}  onIncrement={this.incrementHandler} onDecrement={this.decrementHandler}  onChange={this.changeHandler} />
+    </div>
+    )
   }
 }
 
-export default ProductList;
+
+export default App;
