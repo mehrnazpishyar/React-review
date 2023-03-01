@@ -14,6 +14,12 @@ const Product = (props) => {
       >
         increment
       </button>
+      <button
+        onClick={props.onDecrement}
+        className={styles.button}
+      >
+        decrement
+      </button>
       <button onClick={props.onDelete} className={styles.button}>
         Delete
       </button>
