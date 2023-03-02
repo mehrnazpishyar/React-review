@@ -3,6 +3,9 @@ import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { Component } from "react";
 import Toggle from "./components/Toggle/Toggle";
+import Wrapper from "./components/HOC/Wrapper";
+import ClickCounter from "./components/hocExample/ClickCounter";
+import HoverCounter from "./components/hocExample/HoverCounter";
 
 class App extends Component {
   state = {
@@ -60,8 +63,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container" id="title">
-        <Navbar
+    <Wrapper class="container">
+        {/* <Navbar
           totalItems={this.state.products.filter((p) => p.quantity > 0).length}
         />
         <ProductList
@@ -71,8 +74,10 @@ class App extends Component {
           onDecrement={this.decrementHandler}
           onChange={this.changeHandler}
         />
-        <Toggle />
-      </div>
+        <Toggle /> */}
+        <ClickCounter />
+        <HoverCounter />
+        </Wrapper>
     );
   }
 }
