@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useContext, useEffect} from "react";
 import styles from "./product.module.css";
 import { BiTrash } from "react-icons/bi";
 
+
 const Product = ({ product, onChange, onDecrement, onIncrement, onRemove }) => {
+
+
   return (
     <div className={styles.product}>
       <p>product name : {product.title}</p>

@@ -1,14 +1,12 @@
+import React from "react";
 import "./App.css";
 import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { Component } from "react";
-import Toggle from "./components/Toggle/Toggle";
-import Wrapper from "./components/hoc/Wrapper";
-import ClickCounter from "./components/hocExample/ClickCounter";
-import HoverCounter from "./components/hocExample/HoverCounter";
-import FunctionalRef from "./components/ref/FunctionalRef";
-import UseRefExample from "./components/ref/UseRef";
-import UseRefStore from "./components/ref/UseRefStore";
+import CounterProvider from "./components/Context/CounterProvider";
+import CounterOne from "./components/Context/CounterOne";
+
+
 
 class App extends Component {
   state = {
@@ -66,7 +64,11 @@ class App extends Component {
 
   render() {
     return (
-    <Wrapper class="container">
+      <div className="container">
+        <CounterProvider>
+          <p>welcome to context</p>
+          <CounterOne />
+        </CounterProvider>
         {/* <Navbar
           totalItems={this.state.products.filter((p) => p.quantity > 0).length}
         />
@@ -76,14 +78,8 @@ class App extends Component {
           onIncrement={this.incrementHandler}
           onDecrement={this.decrementHandler}
           onChange={this.changeHandler}
-        />
-        <Toggle />
-        <ClickCounter />
-        <HoverCounter /> 
-        <FunctionalRef />
-         <UseRefExample /> */}
-        <UseRefStore />
-        </Wrapper>
+        /> */}
+      </div>
     );
   }
 }
