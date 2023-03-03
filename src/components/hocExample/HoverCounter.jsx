@@ -1,5 +1,5 @@
 import React from 'react'
-import withCounter from '../HOC/withCounter'
+import withCounter from '../hoc/withCounter'
 
 const HoverCounter = ({count, incrementCount}) => {
 
