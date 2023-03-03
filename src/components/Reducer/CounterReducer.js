@@ -15,8 +15,8 @@ const CounterOne = () => {
     switch (action) {
         case "addOne":
           return state + 1;
-        case "addFive":
-          return state + 5;
+        case "reset":
+          return initialState;
         case "decrement":
           return state - 1;
         default:
@@ -29,7 +29,7 @@ const CounterOne = () => {
     <div>
       <h2>count is {count}</h2>
       <button onClick={() => dispatch('addOne')}>Add One</button>
-      <button onClick={() => dispatch('addFive')}>Add Five</button>
+      <button onClick={() => dispatch('reset')}>Reset</button>
       <button onClick={() => dispatch('decrement')}>Decrement</button>
     </div>
   );

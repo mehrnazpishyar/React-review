@@ -4,7 +4,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { Component } from "react";
 import CounterProvider from "./components/Context/CounterProvider";
-import CounterReducer from './components/Reducer/CounterReducer'
+import ReducerComplex from "./components/Reducer/ReducerComplex";
 
 
 
@@ -67,7 +67,7 @@ class App extends Component {
       <div className="container">
         <CounterProvider>
           <p>welcome to context</p>
-        <CounterReducer />
+    <ReducerComplex />
         </CounterProvider>
         {/* <Navbar
           totalItems={this.state.products.filter((p) => p.quantity > 0).length}
