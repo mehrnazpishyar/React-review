@@ -1,91 +1,70 @@
+import React, { useState } from "react";
 import "./App.css";
 import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import { Component } from "react";
-import Toggle from "./components/Toggle/Toggle";
-import Wrapper from "./components/hoc/Wrapper";
-import ClickCounter from "./components/hocExample/ClickCounter";
-import HoverCounter from "./components/hocExample/HoverCounter";
-import FunctionalRef from "./components/ref/FunctionalRef";
-import UseRefExample from "./components/ref/UseRef";
-import UseRefStore from "./components/ref/UseRefStore";
+import CounterProvider from "./components/Context/CounterProvider";
 
-class App extends Component {
-  state = {
-    products: [
-      { title: "React.js", price: "99 $", id: 1, quantity: 1 },
-      { title: "Node.js", price: "89 $", id: 2, quantity: 2 },
-      { title: "Javascript", price: "79 $", id: 3, quantity: 3 },
-    ],
-    isShow: false,
-  };
 
-  removeHandler = (id) => {
+const App = () => {
+  const [productItems, setProductItems] = useState([
+    { title: "React.js", price: "99 $", id: 1, quantity: 1 },
+    { title: "Node.js", price: "89 $", id: 2, quantity: 2 },
+    { title: "Javascript", price: "79 $", id: 3, quantity: 3 },
+  ]);
+
+  const removeHandler = (id) => {
     console.log("clicked", id);
-    const filterProduct = this.state.products.filter((p) => p.id !== id);
-    this.setState({ products: filterProduct });
+    const filterProduct = productItems.filter((p) => p.id !== id);
+    setProductItems(filterProduct);
   };
 
-  incrementHandler = (id) => {
-    // 1. id => ok
-    // 2. find index
-    // 3. clone the selected index and update the qty
-    // 4. setState()
-
-    const index = this.state.products.findIndex((item) => item.id === id);
-    const product = { ...this.state.products[index] };
+  const incrementHandler = (id) => {
+    const index = productItems.findIndex((item) => item.id === id);
+    const product = { ...productItems[index] };
     product.quantity++;
-    const products = [...this.state.products];
-    products[index] = product;
-    this.setState({ products });
+    const UpdatedProducts = [...productItems];
+    UpdatedProducts[index] = product;
+    setProductItems(UpdatedProducts);
   };
 
-  decrementHandler = (id) => {
-    const index = this.state.products.findIndex((item) => item.id === id);
-    const product = { ...this.state.products[index] };
+  const decrementHandler = (id) => {
+    const index = productItems.findIndex((item) => item.id === id);
+    const product = { ...productItems[index] };
     if (product.quantity === 1) {
-      const filteredProduct = this.state.products.filter((p) => p.id !== id);
-      this.setState({ products: filteredProduct });
+      const filteredProduct = productItems.filter((p) => p.id !== id);
+      setProductItems(filteredProduct);
     } else {
-      const products = [...this.state.products];
+      const UpdatedProducts = [...productItems];
       product.quantity--;
-      //  this.setState({products:products})
-      products[index] = product;
-      this.setState({ products });
+      UpdatedProducts[index] = product;
+      setProductItems(UpdatedProducts);
     }
   };
 
-  changeHandler = (event, id) => {
-    const index = this.state.products.findIndex((item) => item.id === id);
-    const product = [...this.state.products[index]];
+  const changeHandler = (event, id) => {
+    const index = productItems.findIndex((item) => item.id === id);
+    const product = {...productItems[index]};
     product.title = event.target.value;
-    const products = [...this.state.products];
-    products[index] = product;
-    this.setState({ products });
+    const UpdatedProducts = [...productItems];
+    UpdatedProducts[index] = product;
+    setProductItems(UpdatedProducts);
   };
 
-  render() {
-    return (
-    <Wrapper class="container">
-        {/* <Navbar
-          totalItems={this.state.products.filter((p) => p.quantity > 0).length}
-        />
-        <ProductList
-          products={this.state.products}
-          onRemove={this.removeHandler}
-          onIncrement={this.incrementHandler}
-          onDecrement={this.decrementHandler}
-          onChange={this.changeHandler}
-        />
-        <Toggle />
-        <ClickCounter />
-        <HoverCounter /> 
-        <FunctionalRef />
-         <UseRefExample /> */}
-        <UseRefStore />
-        </Wrapper>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <CounterProvider>
+        <p>welcome to context</p>
+      </CounterProvider>
+      <Navbar totalItems={productItems.filter((p) => p.quantity > 0).length} />
+      <ProductList
+        products={productItems}
+        onRemove={removeHandler}
+        onIncrement={incrementHandler}
+        onDecrement={decrementHandler}
+        onChange={changeHandler}
+      />
+    </div>
+  );
+};
 
 export default App;
