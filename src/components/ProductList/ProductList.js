@@ -5,7 +5,7 @@ import { useProducts, useProductsActions } from "../Providers/ProductsProvider";
 
 const ProductList = () => {
   const productItems = useProducts();
-  const {removeHandler, incrementHandler, decrementHandler, changeHandler} = useProductsActions();
+  const dispatch = useProductsActions();
   return (
     <div>
       {!productItems.length && <div>There is no product in cart</div>}
@@ -16,10 +16,10 @@ const ProductList = () => {
             // price={product.price}
             product={product}
             key={index}
-            onRemove={() => removeHandler(product.id)}
-            onIncrement={() => incrementHandler(product.id)}
-            onDecrement={() => decrementHandler(product.id)}
-            onChange = {(e) => changeHandler(e,product.id)}
+            onRemove={() => dispatch({type:"remove", id:product.id}) }
+            onIncrement={() => dispatch({type:"increment", id:product.id})}
+            onDecrement={() => dispatch({type:"decrement", id:product.id})}
+            onChange = {(e) => dispatch({type:"edit", id:product.id, event:e})}
           />
         );
       })}
