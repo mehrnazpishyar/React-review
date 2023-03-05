@@ -1,13 +1,14 @@
 import React, { useContext, useReducer } from "react";
+import { productsData } from "../db/products";
 
 const ProductContext = React.createContext(); //state
 const ProductContextDispatcher = React.createContext(); //setState()
 
-const initialState = [
-  { title: "React.js", price: "99 $", id: 1, quantity: 1 },
-  { title: "Node.js", price: "89 $", id: 2, quantity: 2 },
-  { title: "Javascript", price: "79 $", id: 3, quantity: 3 },
-];
+// const initialState = [
+//   { title: "React.js", price: "99 $", id: 1, quantity: 1 },
+//   { title: "Node.js", price: "89 $", id: 2, quantity: 2 },
+//   { title: "Javascript", price: "79 $", id: 3, quantity: 3 },
+// ];
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,13 +48,25 @@ const reducer = (state, action) => {
       const filterProduct = state.filter((p) => p.id !== action.id);
       return filterProduct;
 
+    case "filter": {
+      if (action.event.target.value === "") {
+        return productsData;
+      } else {
+        console.log(action.event.target.value);
+        const updatedProducts = productsData.filter(
+          (p) => p.availableSize.indexOf(action.event.target.value) >= 0
+        );
+        return updatedProducts;
+      }
+    }
+
     default:
       return state;
   }
 };
 
 const ProductsProvider = ({ children }) => {
-  const [productItems, dispatch] = useReducer(reducer, initialState);
+  const [productItems, dispatch] = useReducer(reducer, productsData);
   return (
     <ProductContext.Provider value={productItems}>
       <ProductContextDispatcher.Provider value={dispatch}>
