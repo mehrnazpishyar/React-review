@@ -4,13 +4,13 @@ import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar.js";
 import ProductsProvider from "./components/Providers/ProductsProvider";
 import FilterProducts from "./components/Filter/FilterProducts";
-import Select from 'react-select';
+
+
 
 const App = () => {
   return (
     <div className="container">
       <ProductsProvider>
-        <p>welcome to context</p>
         <Navbar />
         <FilterProducts />
         <ProductList />
