@@ -13,7 +13,7 @@ const FullComment = ({ commentId }) => {
       .catch((error)=> console.log(error));
   }, [commentId]);
 
-  if (!commentId) return <p>please select a comment !</p>;
+  if (!commentId) return <p style={{marginBottom:"20px"}}>please select a comment !</p>;
   return (
     <div className="fullComment">
       <p>{comment.name} </p>
