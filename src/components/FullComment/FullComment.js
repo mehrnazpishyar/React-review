@@ -4,23 +4,38 @@ import axios from "axios";
 
 const FullComment = ({ commentId }) => {
   const [comment, setComments] = useState(null);
-  console.log("comment:" + comment);
 
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
-      .then((response) => setComments(response.data))
-      .catch((error)=> console.log(error));
+    if (commentId) {
+      axios
+        .get(`http://localhost:3001/comments/${commentId}`)
+        .then((response) => setComments(response.data))
+        .catch((error) => console.log(error));
+    }
   }, [commentId]);
 
-  if (!commentId) return <p style={{marginBottom:"20px"}}>please select a comment !</p>;
-  return (
-    <div className="fullComment">
-      <p>{comment.name} </p>
-      <p>{comment.email} </p>
-      <p>{comment.body}</p>
-    </div>
-  );
+  let commentDetail = <p> please select a comment !</p>;
+
+  if (commentId) commentDetail = <p> loading ...</p>;
+
+  const deleteHandler = () => {
+    axios
+      .delete(`http://localhost:3001/comments/${commentId}`)
+      .then((response) => setComments(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  if (comment) {
+    commentDetail = (
+      <div className="fullComment">
+        <p>{comment.name} </p>
+        <p>{comment.email} </p>
+        <p>{comment.body}</p>
+        <button onClick={deleteHandler}>Delete</button>
+      </div>
+    );
+  }
+  return commentDetail;
 };
 
 export default FullComment;
