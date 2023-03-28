@@ -4,23 +4,30 @@ import axios from "axios";
 
 const FullComment = ({ commentId }) => {
   const [comment, setComments] = useState(null);
-  console.log("comment:" + comment);
 
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
-      .then((response) => setComments(response.data))
-      .catch((error)=> console.log(error));
+    if (commentId) {
+      axios
+        .get(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
+        .then((response) => setComments(response.data))
+        .catch((error) => console.log(error));
+    }
   }, [commentId]);
 
-  if (!commentId) return <p>please select a comment !</p>;
-  return (
-    <div className="fullComment">
+  let commentDetail = <p> please select a comment !</p>;
+
+  if (commentId) commentDetail = <p> loading ...</p>;
+
+  if (comment) {
+    commentDetail = (
+      <div className="fullComment">
       <p>{comment.name} </p>
       <p>{comment.email} </p>
       <p>{comment.body}</p>
     </div>
-  );
+    )
+  }
+return commentDetail
 };
 
 export default FullComment;
