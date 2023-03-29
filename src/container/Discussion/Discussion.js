@@ -20,10 +20,8 @@ const Discussion = () => {
     //   });
     const getComments = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3001/comments"
-        );
-        setComments(data.slice(0, 4));
+        const { data } = await axios.get("http://localhost:3001/comments");
+        setComments(data);
       } catch (error) {
         console.log(error);
       }
@@ -32,8 +30,10 @@ const Discussion = () => {
   }, []);
 
   const selectCommentHandler = (id) => {
-    setSelectedId(id)
+    setSelectedId(id);
   };
+
+
 
   return (
     <main>
@@ -53,10 +53,10 @@ const Discussion = () => {
         )}
       </section>
       <section>
-        <FullComment commentId={selectedId}/>
+        <FullComment commentId={selectedId} />
       </section>
       <section>
-        <NewComment />
+        <NewComment setComments={setComments} />
       </section>
     </main>
   );
