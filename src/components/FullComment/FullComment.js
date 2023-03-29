@@ -18,12 +18,14 @@ const FullComment = ({ commentId }) => {
 
   if (commentId) commentDetail = <p> loading ...</p>;
 
-  const deleteHandler = () => {
-    axios
-      .delete(`http://localhost:3001/comments/${commentId}`)
-      .then((response) => setComments(response.data))
-      .catch((error) => console.log(error));
+  const deleteHandler = async () => {
+    try {
+      await axios.delete(`http://localhost:3001/comments/${commentId}`)
+      const { data } = await axios.get("http://localhost:3001/comments")
+      setComments(data)
+    } catch (error) {}
   };
+
 
   if (comment) {
     commentDetail = (
