@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import http from "../../services/httpService";
 import Comment from "../../components/Comment/Comment";
 import FullComment from "../../components/FullComment/FullComment";
 import NewComment from "../../components/NewComment/NewComment";
+import { getAllComments } from "../../services/getAllComments";
 import "./discussion.css";
+
 
 const Discussion = () => {
   const [comments, setComments] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
+
 
   useEffect(() => {
     // axios
@@ -20,7 +22,7 @@ const Discussion = () => {
     //   });
     const getComments = async () => {
       try {
-        const { data } = await http.get("/comments");
+        const { data } = await getAllComments();
         setComments(data);
       } catch (error) {
         console.log(error);
@@ -29,9 +31,11 @@ const Discussion = () => {
     getComments();
   }, []);
 
+
   const selectCommentHandler = (id) => {
     setSelectedId(id);
   };
+
 
   return (
     <main>
