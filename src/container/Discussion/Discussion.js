@@ -33,8 +33,6 @@ const Discussion = () => {
     setSelectedId(id);
   };
 
-
-
   return (
     <main>
       <section>
@@ -53,7 +51,11 @@ const Discussion = () => {
         )}
       </section>
       <section>
-        <FullComment commentId={selectedId} />
+        <FullComment
+          commentId={selectedId}
+          setComments={setComments}
+          setSelectedId={setSelectedId}
+        />
       </section>
       <section>
         <NewComment setComments={setComments} />
