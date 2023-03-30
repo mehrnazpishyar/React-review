@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import http from "../../services/httpService";
 import "./newComment.css";
 
 const NewComment = ({ setComments }) => {
@@ -20,12 +20,12 @@ const NewComment = ({ setComments }) => {
     //   .then((res)=> setComments(res.data))
     //   .catch((error) => console.log(error));
     try {
-      await axios.post("http://localhost:3001/comments", {
+      await http.post("/comments", {
         ...comment,
         postId: 10,
       });
-      const {data} = await axios.get('http://localhost:3001/comments')
-      setComments(data)
+      const { data } = await http.get("/comments");
+      setComments(data);
     } catch (error) {}
   };
 
