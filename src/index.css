@@ -1,8 +1,36 @@
 * {
   margin: 0;
   padding: 0;
+  list-style: none;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Gill Sans" , "Gill Sans MT" , Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.activeLink{ 
+  color: rgb(161,17,197);
+}
+
+a{
+  text-decoration: none;
+  color: #444;
+}
+
+ul {
+  background-color: #efefef;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  font-size: 18px;
+}
+
+ul li {
+  margin-left: 20px
+}
+
+footer {
+  background-color: rgb(226,221,221);
 }
