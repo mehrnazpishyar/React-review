@@ -2,8 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const items = [
-  { name: "Home", to: "/", exact: true },
+  { name: "Home", to: "/" },
   { name: "About-us", to: "/about-us" },
+  { name: "Blog", to: "/blogs" },
 ];
 
 const Navigation = () => {
@@ -15,8 +16,7 @@ const Navigation = () => {
             <li key={item.to}>
               <NavLink
                 to={item.to}
-                activeClassName="activeLink"
-                exact={item.exact || false}
+                className ="activeLink"
               >
                 {item.name}
               </NavLink>
