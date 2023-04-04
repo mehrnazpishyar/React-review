@@ -1,21 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+const items = [
+  { name: "Home", to: "/" },
+  { name: "About-us", to: "/about-us" },
+  { name: "Blog", to: "/blogs" },
+  { name: "Profile", to: "/profile" },
+];
 
 const Navigation = () => {
   return (
-    <div>
-          <nav>
+    <nav>
       <ul>
-        <li>
-          <Link to="/">home</Link>
-        </li>
-        <li>
-          <Link to="/about-us">about-us</Link>
-        </li>
+        {items.map((item) => {
+          return (
+            <li key={item.to}>
+              <NavLink
+                to={item.to}
+                className ="activeLink"
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
     </nav>
-    </div>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

@@ -1,11 +1,10 @@
 import React from "react";
 
-
 const AboutUsPage = () => {
   return (
-    <div>
-      <p> AboutUsPage</p>
-    </div>
+  <div>
+    <p> this is AboutUsPage</p>
+  </div>
   );
 };
 
